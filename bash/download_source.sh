@@ -10,7 +10,7 @@ else
     WORKDIR="domains/${USERNAME}.serv00.net/logs"
 fi
 
-cd $"WORKDIR"
+cd "$WORKDIR"
 
 SUBS_DIR="$WORKDIR/subs_check"
 REPO_URL="https://github.com/beck-8/subs-check.git"
