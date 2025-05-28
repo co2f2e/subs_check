@@ -1,3 +1,7 @@
+* 下载源码
+```bash
+bash <(curl -Ls https://raw.githubusercontent.com/co2f2e/subs_check/main/bash/download_source.sh)
+```
 * 下载解压并开机自启
 ```bash
 bash <(curl -Ls https://raw.githubusercontent.com/co2f2e/subs_check/main/bash/download.sh)
