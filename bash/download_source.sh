@@ -10,8 +10,6 @@ else
     WORKDIR="domains/${USERNAME}.serv00.net/logs"
 fi
 
-cd "$WORKDIR"
-
 SUBS_DIR="$WORKDIR/subs_check"
 REPO_URL="https://github.com/beck-8/subs-check.git"
 CONFIG_FILE="$SUBS_DIR/config/config.yaml"
