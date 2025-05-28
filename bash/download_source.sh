@@ -14,7 +14,8 @@ cd "$WORKDIR"
 
 SUBS_DIR="$WORKDIR/subs_check"
 REPO_URL="https://github.com/beck-8/subs-check.git"
-CONFIG_FILE="$WORKDIR/$SUBS_DIR/config.yaml"
+CONFIG_FILE="$WORKDIR/$SUBS_DIR/config/config.yaml"
+CONFIG_EXAMPLE_FILE="$WORKDIR/$SUBS_DIR/config/config.example.yaml"
 LOG_PATH="$WORKDIR/$SUBS_DIR/subs-check.log"
 
 if ! command -v go >/dev/null 2>&1; then
@@ -34,11 +35,4 @@ else
   cd "$SUBS_DIR" && git pull
 fi
 
-if [ -f "$CONFIG_FILE" ]; then
-  echo "开始执行 subs-check ..."
-  cd "$SUBS_DIR" || exit 1
-  go run main.go -f "$CONFIG_FILE" > "$LOG_PATH" 2>&1
-  echo "执行完成，日志记录于 $LOG_PATH"
-else
-  echo "配置文件 $CONFIG_FILE 不存在，请先创建"
-fi
+mv "$CONFIG_EXAMPLE_FILE" "$CONFIG_FILE"
