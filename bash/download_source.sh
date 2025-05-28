@@ -1,5 +1,6 @@
 #!/bin/sh
 clear
+cd ~
 
 USERNAME=$(whoami)
 HOSTNAME=$(hostname)
