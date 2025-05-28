@@ -15,7 +15,6 @@ SUBS_DIR="$WORKDIR/subs_check"
 REPO_URL="https://github.com/beck-8/subs-check.git"
 CONFIG_EXAMPLE_FILE="$SUBS_DIR/config/config.example.yaml"
 CONFIG_FILE="$SUBS_DIR/config/config.yaml"
-LOG_PATH="$SUBS_DIR/subs-check.log"
 
 if ! command -v go >/dev/null 2>&1; then
   echo "未检测到 Go，正在安装..."
@@ -56,8 +55,7 @@ go build -ldflags="-X main.Version=dev -X main.CurrentCommit=local" -o subs-chec
 
 echo
 echo "二进制文件 subs-check 编译成功，请修改配置文件 config.yaml"
-echo "注意：分配到的 TCP 端口是: $tcp_port，请修改 config.yaml 中的 listen-port 为该端口。"
-echo "在 subs_check 目录下执行 nohup ./subs-check -f config/config.yaml > subs-check.log 2>&1 & 后台运行程序。"
+echo "注意：分配到的 TCP 端口是: $tcp_port，请修改 config.yaml 中的 listen-port 为该端口"
+echo "在 subs_check 目录下执行 nohup ./subs-check -f config/config.yaml > output/subs-check.log 2>&1 & 后台运行程序"
 
-# 二进制文件运行，删除不必要的源码文件
 rm -rf app check doc Dockerfile go.mod go.sum init.go LICENSE main.go Makefile proxy README.md save utils assets
