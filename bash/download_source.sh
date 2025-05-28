@@ -35,4 +35,6 @@ else
   cd "$SUBS_DIR" && git pull
 fi
 
-mv "$CONFIG_EXAMPLE_FILE" "$CONFIG_FILE"
+cp "$CONFIG_EXAMPLE_FILE" "$CONFIG_FILE"
+
+go build -ldflags="-X main.Version=dev -X main.CurrentCommit=local" -o subs-check
