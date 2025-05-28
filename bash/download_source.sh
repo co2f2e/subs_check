@@ -13,8 +13,8 @@ fi
 
 SUBS_DIR="$WORKDIR/subs_check"
 REPO_URL="https://github.com/beck-8/subs-check.git"
-CONFIG_EXAMPLE_FILE="$SUBS_DIR/config/config.example.yaml"
-CONFIG_FILE="$SUBS_DIR/config/config.yaml"
+CONFIG_EXAMPLE_FILE="config/config.example.yaml"
+CONFIG_FILE="config/config.yaml"
 
 if ! command -v go >/dev/null 2>&1; then
   echo "未检测到 Go，正在安装..."
@@ -51,12 +51,19 @@ tcp_port=$(get_tcp_port)
 
 go build -ldflags="-X main.Version=dev -X main.CurrentCommit=local" -o subs-check
 
-mv "$CONFIG_EXAMPLE_FILE" "$CONFIG_FILE" 
+if [ -f "$CONFIG_EXAMPLE_FILE" ]; then
+  mv "$CONFIG_EXAMPLE_FILE" "$CONFIG_FILE"
+else
+  echo "找不到配置模板 config/config.example.yaml"
+  exit 1
+fi
+
 echo
 echo "-----------------------------------------------------------------------------------"
-echo "二进制文件 subs-check 编译成功，请修改配置文件 config.yaml"
-echo "注意：分配到的 TCP 端口是: $tcp_port，请修改 config.yaml 中的 listen-port 为该端口"
-echo "在 subs_check 目录下执行 nohup ./subs-check -f config/config.yaml > output/subs-check.log 2>&1 & 后台运行程序"
+echo "1.二进制文件 subs-check 编译成功，请根据说明修改配置文件 config.yaml"
+echo "2.分配到的 TCP 端口是: $tcp_port，请修改 config.yaml 中的 listen-port 为该端口"
+echo "3.在 subs_check 目录下执行 nohup ./subs-check -f config/config.yaml > output/subs-check.log 2>&1 & 后台运行程序"
 echo "-----------------------------------------------------------------------------------"
+echo
 
-rm -rf app check doc Dockerfile go.mod go.sum init.go LICENSE main.go Makefile proxy README.md save utils assets
+rm -rf app check doc Dockerfile go.mod go.sum init.go LICENSE main.go Makefile proxy README.md save utils assets config/config.go
