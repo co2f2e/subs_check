@@ -54,7 +54,7 @@ echo "注意：分配到的 TCP 端口是: $tcp_port，请修改 config.yaml 中
 go build -ldflags="-X main.Version=dev -X main.CurrentCommit=local" -o subs-check
 
 echo
-echo "二进制文件 subs-check 编译成功，请上传 config.yaml 到 config 目录下，配置参考该目录下的配置模板 config.example.yaml，然后在 subs_check 目录下执行 nohup ./subs-check -f config/config.yaml > subs-check.log 2>&1 &
+echo "二进制文件 subs-check 编译成功，拷贝并重命名 config.example.yaml为config.yaml 到 config 目录下，配置参考该目录下的配置模板 config.example.yaml，然后在 subs_check 目录下执行 nohup ./subs-check -f config/config.yaml > subs-check.log 2>&1 &
 后台运行程序。"
 
 # 二进制文件运行，删除不必要的源码文件
