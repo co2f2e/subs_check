@@ -21,7 +21,6 @@ if [ ! -d "$SUBS_DIR" ]; then
   chmod +x "$BINARY_NAME"
   echo "下载并解压成功"
 else
-  cd "$SUBS_DIR" || exit 1
   echo "目录已存在，请先手动删除"
 fi
 
