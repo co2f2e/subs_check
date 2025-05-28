@@ -42,22 +42,16 @@ echo " subs-check 编译成功，执行方式./subs-check -f config/config.yaml"
 
 get_tcp_port() {
   local port
-  port=$(devil port list | awk '$1=="tcp" {print $3; exit}')
+  port=$(devil port list | awk '$2=="tcp" {print $1; exit}')
   if [ -n "$port" ]; then
     echo "$port"
   else
-    devil port add tcp random >/dev/null 2>&1
-    port=$(devil port list | awk '$1=="tcp" {print $3; exit}')
+    devil port add tcp random subs-check >/dev/null 2>&1
+    port=$(devil port list | awk '$2=="tcp" {print $1; exit}')
     echo "$port"
   fi
 }
 
 tcp_port=$(get_tcp_port)
-echo "分配到的 TCP 端口是: $tcp_port"
-
-if [ -f "$CONFIG_FILE" ]; then
-  sed -i '' "s|^listen-port: \".*\"|listen-port: \":$tcp_port\"|" "$CONFIG_FILE"
-  echo "已更新 $CONFIG_FILE 中的 listen-port 为 :$tcp_port"
-else
-  echo "配置文件 $CONFIG_FILE 不存在"
-fi
+echo
+echo "注意：分配到的 TCP 端口是: $tcp_port，请修改 config.yaml 中的 listen-port 为该端口"
