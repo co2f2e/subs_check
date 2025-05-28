@@ -5,7 +5,7 @@ SUBS_DIR="/subs_check"
 BINARY_NAME="subs-check"
 BINARY_PATH="$SUBS_DIR/$BINARY_NAME"
 LOG_PATH="$SUBS_DIR/$BINARY_NAME.log"
-CRON_CMD="$BINARY_PATH > $LOG_PATH 2>&1 &"
+CRON_CMD="cd $SUBS_DIR && ./$BINARY_NAME > $LOG_PATH 2>&1"
 
 if [ ! -d "$SUBS_DIR" ]; then
   mkdir -p "$SUBS_DIR"
@@ -18,8 +18,8 @@ if [ ! -d "$SUBS_DIR" ]; then
   && tar -xzf ${BINARY_NAME}_Linux_x86_64.tar.gz \
   && rm ${BINARY_NAME}_Linux_x86_64.tar.gz
 
-  chmod +x "$BINARY_PATH"
-  echo "下载并解压成功，请修改配置文件 config.yaml 并执行后台运行命令运行。"
+  chmod +x "$BINARY_NAME"
+  echo "下载并解压成功"
 else
   cd "$SUBS_DIR" || exit 1
   echo "目录已存在，请先手动删除"
@@ -32,3 +32,5 @@ if [ $? -ne 0 ]; then
 else
   echo "开机自启任务已存在"
 fi
+echo
+./"$BINARY_NAME"
