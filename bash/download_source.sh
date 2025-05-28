@@ -14,9 +14,9 @@ cd "$WORKDIR"
 
 SUBS_DIR="$WORKDIR/subs_check"
 REPO_URL="https://github.com/beck-8/subs-check.git"
-CONFIG_FILE="$WORKDIR/$SUBS_DIR/config/config.yaml"
-CONFIG_EXAMPLE_FILE="$WORKDIR/$SUBS_DIR/config/config.example.yaml"
-LOG_PATH="$WORKDIR/$SUBS_DIR/subs-check.log"
+CONFIG_FILE="$SUBS_DIR/config/config.yaml"
+CONFIG_EXAMPLE_FILE="$SUBS_DIR/config/config.example.yaml"
+LOG_PATH="$SUBS_DIR/subs-check.log"
 
 if ! command -v go >/dev/null 2>&1; then
   echo "未检测到 Go，正在安装..."
