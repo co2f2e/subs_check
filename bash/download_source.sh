@@ -62,7 +62,7 @@ echo
 echo "-----------------------------------------------------------------------------------"
 echo "1.二进制文件 subs-check 编译成功，请根据说明修改配置文件 config.yaml"
 echo "2.分配到的 TCP 端口是: $tcp_port，请修改 config.yaml 中的 listen-port 为该端口"
-echo "3.在 subs_check 目录下执行 nohup ./subs-check -f config/config.yaml > output/subs-check.log 2>&1 & 后台运行程序"
+echo "3.在 subs_check 目录下执行 nohup ./subs-check -f config/config.yaml > nohup.log 2>&1 & 后台运行程序"
 echo "-----------------------------------------------------------------------------------"
 echo
 
