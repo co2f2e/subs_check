@@ -1,4 +1,4 @@
-# FreeBSD 14+
+# Serv00
 * 下载源码并编译为二进制文件
 ```bash
 bash <(curl -Ls https://raw.githubusercontent.com/co2f2e/subs_check/main/bash/download_source.sh)
