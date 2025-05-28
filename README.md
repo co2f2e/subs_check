@@ -1,7 +1,9 @@
-* 下载源码
+# FreeBSD 14+
+* 下载源码并编译为二进制文件
 ```bash
 bash <(curl -Ls https://raw.githubusercontent.com/co2f2e/subs_check/main/bash/download_source.sh)
 ```
+# Debian 12+
 * 下载解压并开机自启
 ```bash
 bash <(curl -Ls https://raw.githubusercontent.com/co2f2e/subs_check/main/bash/download.sh)
