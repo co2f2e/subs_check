@@ -13,12 +13,14 @@ show_menu() {
   green "3. 终止运行"
   green "4. 停止并清除相关内容"
   green "5. 查看日志"
+  green "6. 查看配置文件"
   green "0. 退出"
   green "====================================="
 }
   SUBS_DIR="/subs_check"
   BINARY_NAME="subs-check"
   BINARY_PATH="$SUBS_DIR/$BINARY_NAME"
+  CONFIG_FILE="$SUBS_DIR/config/config.yaml"
   LOG_PATH="$SUBS_DIR/$BINARY_NAME.log"
   CRON_CMD="cd $SUBS_DIR && ./$BINARY_NAME > $LOG_PATH 2>&1"
   LOG_FILE="$SUBS_DIR/output.log"
@@ -74,7 +76,7 @@ option_4() {
     crontab -l | grep -v subs-check | crontab -
     pkill -f "$BINARY_NAME"
     rm -rf "$SUBS_DIR"
-    green "已清除所有相关内容"
+    green "已停止程序并清除相关内容"
   else
     yellow "取消清除操作"
   fi
@@ -86,6 +88,15 @@ option_5() {
     tail -n 20 "$LOG_FILE"
   else
     red "日志文件不存在"
+  fi
+}
+
+option_6() {
+  if [ -f "$CONFIG_FILE" ]; then
+    clear
+    cat "$CONFIG_FILE"
+  else
+    red "配置文件不存在，请先运行一次程序，自动生成默认的配置文件"
   fi
 }
 
