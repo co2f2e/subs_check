@@ -69,12 +69,12 @@ option_3() {
 
 option_4() {
   echo
-  read -p "$(red ' 确认清除 subs-check 及所有相关内容？(y/n): ')" confirm
+  read -p "$(red '确认清除 subs-check 及所有相关内容？(y/n): ')" confirm
   if [[ "$confirm" == "y" || "$confirm" == "Y" ]]; then
     crontab -l | grep -v subs-check | crontab -
     pkill -f "$BINARY_NAME"
     rm -rf "$SUBS_DIR"
-    green " 已清除所有相关内容"
+    green "已清除所有相关内容"
   else
     yellow "取消清除操作"
   fi
@@ -85,7 +85,7 @@ option_5() {
   if [ -f "$LOG_FILE" ]; then
     tail -n 20 "$LOG_FILE"
   else
-    red " 日志文件不存在"
+    red "日志文件不存在"
   fi
 }
 
@@ -102,10 +102,10 @@ while true; do
     5) option_5 ;;
     0)
       echo ""
-      green " 退出脚本。"
+      green "退出脚本。"
       exit 0
       ;;
-    *) red " 无效的选项，请重新输入。" ;;
+    *) red "无效的选项，请重新输入。" ;;
   esac
 
   echo ""
