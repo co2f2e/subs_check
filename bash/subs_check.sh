@@ -103,6 +103,8 @@ while true; do
     0)
       echo ""
       green "退出脚本。"
+      sleep 1
+      clear
       exit 0
       ;;
     *) red "无效的选项，请重新输入。" ;;
