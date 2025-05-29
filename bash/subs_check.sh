@@ -93,7 +93,8 @@ option_5() {
 
 option_6() {
   if [ -f "$CONFIG_FILE" ]; then
-    clear
+    echo
+    green "-----------配置文件-----------"
     cat "$CONFIG_FILE"
   else
     red "配置文件不存在，请先运行一次程序，自动生成默认的配置文件"
