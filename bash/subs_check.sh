@@ -102,7 +102,7 @@ option_6() {
 
 while true; do
   show_menu
-  read -p "$(yellow '请选择一个选项 [0-5]：')" choice
+  read -p "$(yellow '请选择一个选项 [0-6]：')" choice
   echo ""
 
   case $choice in
@@ -111,6 +111,7 @@ while true; do
     3) option_3 ;;
     4) option_4 ;;
     5) option_5 ;;
+    6) option_6 ;;
     0)
       echo ""
       green "退出脚本。"
