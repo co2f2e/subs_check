@@ -21,7 +21,7 @@ show_menu() {
   BINARY_PATH="$SUBS_DIR/$BINARY_NAME"
   LOG_PATH="$SUBS_DIR/$BINARY_NAME.log"
   CRON_CMD="cd $SUBS_DIR && ./$BINARY_NAME > $LOG_PATH 2>&1"
-  LOG_FILE="/subs_check/output.log"
+  LOG_FILE="$SUBS_DIR/output.log"
 
 option_1() {
   echo
