@@ -7,24 +7,24 @@ blue() { echo -e "\e[34m$1\e[0m"; }
 
 show_menu() {
   clear
-  echo "============SubsCheck================"
-  echo "1. 下载压缩并设置开机自启"
-  echo "2. 后台运行 subs-check"
-  echo "3. 终止运行"
-  echo "4. 清除所有相关内容"
-  echo "5. 查看运行日志"
-  echo "0. 退出"
-  echo "====================================="
+  green "============SubsCheck================"
+  green "1. 下载压缩并设置开机自启"
+  green "2. 后台运行 subs-check"
+  green "3. 终止运行"
+  green "4. 停止并清除相关内容"
+  green "5. 查看日志"
+  green "0. 退出"
+  green "====================================="
 }
-
-option_1() {
-  echo
   SUBS_DIR="/subs_check"
   BINARY_NAME="subs-check"
   BINARY_PATH="$SUBS_DIR/$BINARY_NAME"
   LOG_PATH="$SUBS_DIR/$BINARY_NAME.log"
   CRON_CMD="cd $SUBS_DIR && ./$BINARY_NAME > $LOG_PATH 2>&1"
+  LOG_FILE="/subs_check/output.log"
 
+option_1() {
+  echo
   if [ ! -d "$SUBS_DIR" ]; then
     mkdir -p "$SUBS_DIR"
     cd "$SUBS_DIR" || exit 1
@@ -58,13 +58,13 @@ option_1() {
 
 option_2() {
   echo
-  nohup /subs_check/subs-check >/subs_check/output.log 2>&1 &
+  nohup "$BINARY_PATH" >"$LOG_FILE" 2>&1 &
   green " subs-check 已在后台运行"
 }
 
 option_3() {
   echo
-  pkill -f subs-check && green " subs-check 已终止" || red " subs-check 未运行"
+  pkill -f "$BINARY_NAME" && green " subs-check 已终止" || red " subs-check 未运行"
 }
 
 option_4() {
@@ -72,8 +72,8 @@ option_4() {
   read -p "$(red ' 确认清除 subs-check 及所有相关内容？(y/n): ')" confirm
   if [[ "$confirm" == "y" || "$confirm" == "Y" ]]; then
     crontab -l | grep -v subs-check | crontab -
-    pkill -f subs-check
-    rm -rf /subs_check
+    pkill -f "$BINARY_NAME"
+    rm -rf "$SUBS_DIR"
     green " 已清除所有相关内容"
   else
     yellow "取消清除操作"
@@ -82,8 +82,8 @@ option_4() {
 
 option_5() {
   echo
-  if [ -f /subs_check/output.log ]; then
-    tail -f /subs_check/output.log
+  if [ -f "$LOG_FILE" ]; then
+    tail -n 20 "$LOG_FILE"
   else
     red " 日志文件不存在"
   fi
